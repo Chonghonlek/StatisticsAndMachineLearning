@@ -24,12 +24,12 @@ Accuracy of $\hat{Y}$ depends on reducible and irreducible error. $\hat{f}$ is g
 Irreducible error stems from the variability of $\epsilon$
 
 
-$$
+```math
 \begin{aligned}
 E(Y - \hat{Y})^2 &= E(f(X) + \epsilon - \hat{f}(X))^2 \\
 &= \underbrace{[f(X) - \hat{f}(X)]^2}_{\text{reducible error}} +\underbrace{Var(\epsilon)}_{\text{irreducible error}} \quad \because Var(\epsilon) = E(\epsilon^2) - E(\epsilon)^2 = E(\epsilon^2)
 \end{aligned}
-$$
+```
 
 
 2) Inference
@@ -108,14 +108,14 @@ $$
 <details>
 <summary>Note</summary>
 
-$$
+```math
 \begin{aligned}
 \text{Bias}(\hat{\theta}) &= E(\hat{\theta}) - \theta \\
 \\
 E[(\hat{y} - y)^2] &= E[(\hat{y} - E[\hat{y}])^2] + (E[\hat{y}] - y)^2 \\
 MSE & = Variance + Bias^2               
 \end{aligned}
-$$
+```
 
 Possible heuristic:
 
@@ -127,7 +127,7 @@ $Bias^2$ = how far is the average model from the actual
 
 Derivation:
 
-$$
+```math
 \begin{aligned}
 E[(y - \hat{y})^2] &= E[(f(x) - \hat{f}(x))^2] + \sigma_\epsilon^2 \\
 \\
@@ -139,7 +139,7 @@ E[(f(x) - \hat{f}(x))^2] &= E[((f(x)-E[\hat{f}(x)])- (\hat{f}(x)- E[\hat{f}(x)] 
 \because E[(E[\hat{f}(x)]- f(x))^2] \quad &\text{is the expectation of a constant}\\
 =& \text{Bias}[\hat{f}(x)]^2 + Var(\hat{f}(x))
 \end{aligned}
-$$
+```
 
 </details> <br>
 
