@@ -9,7 +9,7 @@ and implement them in python
 
 ## What are we trying to solve in Stats learning
 
-There is some relation between Response $Y$ and predictors $ X = (X_1 \cdots X_P)$ in the form $Y = f(X) + \epsilon$
+There is some relation between Response $Y$ and predictors $X = (X_1 \cdots X_P)$ in the form $Y = f(X) + \epsilon$
 
 Here $f$ is some fixed but unknown function of $X$ and $\epsilon$ is the error term indepent of $X$ and has mean = 0. $f$ represents the systematic information that $X$ provides about $Y$.
 
@@ -23,12 +23,12 @@ Accuracy of $\hat{Y}$ depends on reducible and irreducible error. $\hat{f}$ is g
 
 Irreducible error stems from the variability of $\epsilon$
 
-$$
-\begin{aligned}
+
+$$\begin{align*}
 E(Y - \hat{Y})^2 &= E(f(X) + \epsilon - \hat{f}(X))^2 \\
 &= \underbrace{[f(X) - \hat{f}(X)]^2}_{\text{reducible error}} +\underbrace{Var(\epsilon)}_{\text{irreducible error}} \quad \because Var(\epsilon) = E(\epsilon^2) - E(\epsilon)^2 = E(\epsilon^2)
-\end{aligned}
-$$
+\end{align*}$$
+
 
 2) Inference
 
@@ -85,7 +85,7 @@ In other words we compute the averaged squared prediction error : $Avg(y_0 - \ha
 
 If no test data is available, we select the learning method that minimises the _training MSE_ instead
 
-![Taken from Gareth J et al](images/Screenshot%202024-05-20%20Figure2.9%20G%20James.png)
+![figure 2.9 Taken from Gareth J et al](images/Screenshot%202024-05-20%20Figure2.9%20G%20James.png)
 
 From the above figure, we see the tradeoff between flexibility and MSE. As we add in more parameters/Degree of freedoms, training MSE falls. However, test MSE will only fall until a certain point, after which test MSE rises due to overfitting of the model. ie when a small trainig MSE leads to a large test MSE we say this to be overfitting the data. 
 
@@ -106,14 +106,13 @@ $$
 <details>
 <summary>Note</summary>
 
-$$
-\begin{aligned}
+$$\begin{aligned}
 \text{Bias}(\hat{\theta}) &= E(\hat{\theta}) - \theta \\
 \\
 E[(\hat{y} - y)^2] &= E[(\hat{y} - E[\hat{y}])^2] + (E[\hat{y}] - y)^2 \\
 MSE & = Variance + Bias^2               
-\end{aligned}
-$$
+\end{aligned}$$
+
 
 Possible heuristic:
 
@@ -125,8 +124,8 @@ $Bias^2$ = how far is the average model from the actual
 
 Derivation:
 
-$$
-\begin{aligned}
+
+$$\begin{aligned}
 E[(y - \hat{y})^2] &= E[(f(x) - \hat{f}(x))^2] + \sigma_\epsilon^2 \\
 \\
 E[(f(x) - \hat{f}(x))^2] &= E[((f(x)-E[\hat{f}(x)])- (\hat{f}(x)- E[\hat{f}(x)] ))^2]  \\
@@ -136,8 +135,7 @@ E[(f(x) - \hat{f}(x))^2] &= E[((f(x)-E[\hat{f}(x)])- (\hat{f}(x)- E[\hat{f}(x)] 
 &-2(f(x)-E[\hat{f}(x)])(E[\hat{f}(x)] - E[\hat{f}(x)]) \\
 \because E[(E[\hat{f}(x)]- f(x))^2] \quad &\text{is the expectation of a constant}\\
 =& \text{Bias}[\hat{f}(x)]^2 + Var(\hat{f}(x))
-\end{aligned}
-$$
+\end{aligned}$$
 
 
 </details> <br>
@@ -181,10 +179,10 @@ For real data, we do not know the conditional distribution of Y given X and so c
 
 One way to estimate the conditional distribution of Y given X and classify a given observation to the class with highest estimated probability is the **KNN classifier**
 
-KNN Classifier first identifies the K (+ve int) points in the training data closest to $x_0$ given by $\Nu_0$. It then estimates the conditional probability for class j as a fraction of points in $\Nu_0$ whose response values equal j:
+KNN Classifier first identifies the K (+ve int) points in the training data closest to $x_0$ given by $N_0$. It then estimates the conditional probability for class j as a fraction of points in $N_0$ whose response values equal j:
 
 $$
-P(Y = j|X= x_0) = \frac{1}{K} \sum_{i \in \Nu_0} I(y_i = j)
+P(Y = j|X= x_0) = \frac{1}{K} \sum_{i \in N_0} I(y_i = j)
 $$
 
 KNN then classifies the test observation $x_0$ to the class with the class with the largest probability above.
@@ -193,7 +191,7 @@ Suppose K = 3, KNN identifies the 3 observations closest to the point x_0 and co
 
 In fact, we can see that the KNN decision boundary is similar to the bayes decision boundary.
 
-![KNN](images/Screenshot%202024-05-20%20Figure2.16%20Gareet%20J.png)
+![Figure2.16 KNN from Gareth J et al](images/Screenshot%202024-05-20%20Figure2.16%20Gareet%20J.png)
 
 However when K = 1, we see that the decision boundary is overly flexible and finds patterns that dont correspond to the bayes decision boundary, this corresponds to low bias and high variance.
 As K increases, the method becomes less flexible and produices a decision boundary that is close to linear. This corresponds to high bias and low variance.
