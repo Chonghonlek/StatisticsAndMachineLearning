@@ -24,10 +24,12 @@ Accuracy of $\hat{Y}$ depends on reducible and irreducible error. $\hat{f}$ is g
 Irreducible error stems from the variability of $\epsilon$
 
 
-$$\begin{align*}
+$$
+\begin{align*}
 E(Y - \hat{Y})^2 &= E(f(X) + \epsilon - \hat{f}(X))^2 \\
 &= \underbrace{[f(X) - \hat{f}(X)]^2}_{\text{reducible error}} +\underbrace{Var(\epsilon)}_{\text{irreducible error}} \quad \because Var(\epsilon) = E(\epsilon^2) - E(\epsilon)^2 = E(\epsilon^2)
-\end{align*}$$
+\end{align*}
+$$
 
 
 2) Inference
@@ -105,15 +107,14 @@ $$
 
 <details>
 <summary>Note</summary>
-
-$$\begin{aligned}
+$$
+\begin{aligned}
 \text{Bias}(\hat{\theta}) &= E(\hat{\theta}) - \theta \\
 \\
 E[(\hat{y} - y)^2] &= E[(\hat{y} - E[\hat{y}])^2] + (E[\hat{y}] - y)^2 \\
 MSE & = Variance + Bias^2               
-\end{aligned}$$
-
-
+\end{aligned}
+$$
 Possible heuristic:
 
 MSE = how far model is from actual 
@@ -124,8 +125,8 @@ $Bias^2$ = how far is the average model from the actual
 
 Derivation:
 
-
-$$\begin{aligned}
+$$
+\begin{aligned}
 E[(y - \hat{y})^2] &= E[(f(x) - \hat{f}(x))^2] + \sigma_\epsilon^2 \\
 \\
 E[(f(x) - \hat{f}(x))^2] &= E[((f(x)-E[\hat{f}(x)])- (\hat{f}(x)- E[\hat{f}(x)] ))^2]  \\
@@ -135,8 +136,8 @@ E[(f(x) - \hat{f}(x))^2] &= E[((f(x)-E[\hat{f}(x)])- (\hat{f}(x)- E[\hat{f}(x)] 
 &-2(f(x)-E[\hat{f}(x)])(E[\hat{f}(x)] - E[\hat{f}(x)]) \\
 \because E[(E[\hat{f}(x)]- f(x))^2] \quad &\text{is the expectation of a constant}\\
 =& \text{Bias}[\hat{f}(x)]^2 + Var(\hat{f}(x))
-\end{aligned}$$
-
+\end{aligned}
+$$
 
 </details> <br>
 
@@ -182,7 +183,7 @@ One way to estimate the conditional distribution of Y given X and classify a giv
 KNN Classifier first identifies the K (+ve int) points in the training data closest to $x_0$ given by $N_0$. It then estimates the conditional probability for class j as a fraction of points in $N_0$ whose response values equal j:
 
 $$
-P(Y = j|X= x_0) = \frac{1}{K} \sum_{i \in N_0} I(y_i = j)
+P(Y = j|X= x_0) = \frac{1}{K} \sum_{i \in **N_0**} I(y_i = j)
 $$
 
 KNN then classifies the test observation $x_0$ to the class with the class with the largest probability above.
