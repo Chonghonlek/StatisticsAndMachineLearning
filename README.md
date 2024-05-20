@@ -25,10 +25,10 @@ Irreducible error stems from the variability of $\epsilon$
 
 
 $$
-\begin{align*}
+\begin{aligned}
 E(Y - \hat{Y})^2 &= E(f(X) + \epsilon - \hat{f}(X))^2 \\
 &= \underbrace{[f(X) - \hat{f}(X)]^2}_{\text{reducible error}} +\underbrace{Var(\epsilon)}_{\text{irreducible error}} \quad \because Var(\epsilon) = E(\epsilon^2) - E(\epsilon)^2 = E(\epsilon^2)
-\end{align*}
+\end{aligned}
 $$
 
 
@@ -107,6 +107,7 @@ $$
 
 <details>
 <summary>Note</summary>
+
 $$
 \begin{aligned}
 \text{Bias}(\hat{\theta}) &= E(\hat{\theta}) - \theta \\
@@ -115,6 +116,7 @@ E[(\hat{y} - y)^2] &= E[(\hat{y} - E[\hat{y}])^2] + (E[\hat{y}] - y)^2 \\
 MSE & = Variance + Bias^2               
 \end{aligned}
 $$
+
 Possible heuristic:
 
 MSE = how far model is from actual 
