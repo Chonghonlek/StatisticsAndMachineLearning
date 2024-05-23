@@ -34,17 +34,14 @@ $`
 \begin{aligned}
 n\hat{\beta_0} + \hat{\beta_1} \sum x_i &= \sum y_i \\
 n\hat{\beta_0} + n \bar{x}\hat{\beta_1} &= n \bar{y} \\
-\hat{\beta_0} &= \bar{y} - \hat{\beta_1}\bar{x} \tag{coefficient of $\beta_0$} \\
-\end{aligned}
-`$
-
-$`
-\begin{aligned}
-\text{sub $\beta_0$ into (2),} \quad \sum y_i x_i - (\bar{y} - \hat{\beta_1}\bar{x})\sum x_i - \hat{\beta_1} \sum x_i^2 &=0 \\
-\sum y_i x_i - \bar{y}\sum x_i - \hat{\beta_1}\bar{x}\sum x_i - \hat{\beta_1} \sum x_i^2 &=0 \\
-\hat{\beta_1} (\sum x_i^2 -\bar{x}\sum x_i) = \sum y_i x_i - \bar{y}\sum x_i
+\hat{\beta_0} &= \bar{y} - \hat{\beta_1}\bar{x} &(\text{coefficient of } \beta_0)\\
+\\ \text{sub } \beta_0 \text{ into (2)}
 \\
-\hat{\beta_1} = \frac{\sum y_i x_i - \frac{\sum y_i\sum x_i}{n}}{\sum x_i^2 - \frac{(\sum x_i)^2}{n}} \tag{coefficient of $\beta_1$}
+\quad \sum y_i x_i - (\bar{y} - \hat{\beta_1}\bar{x})\sum x_i &- \hat{\beta_1} \sum x_i^2 =0 \\
+\sum y_i x_i - \bar{y}\sum x_i &- \hat{\beta_1}\bar{x}\sum x_i - \hat{\beta_1} \sum x_i^2 =0 \\
+\hat{\beta_1} (\sum x_i^2 -\bar{x}\sum x_i) &= \sum y_i x_i - \bar{y}\sum x_i
+\\
+\hat{\beta_1} &= \frac{\sum y_i x_i - \frac{\sum y_i\sum x_i}{n}}{\sum x_i^2 - \frac{(\sum x_i)^2}{n}} &(\text{coefficient of } \beta_1)
 \end{aligned}
 `$
 
@@ -119,7 +116,7 @@ $`
 \begin{aligned}
 Cov(\bar{y},\hat{\beta_1}) &= Cov(\frac{1}{n}\sum y_i,\sum C_i y_i), \quad C_i = \frac{(x_i -\bar{x})}{\sum (x_i -\bar{x}) ^2} \\
 &= \frac{1}{n} \sum_i Cov(y_i,C_iy_i) + \frac{1}{n} \sum\sum_{i \neq j} Cov(y_i,C_j,yj) \\
-&= \frac{1}{n} \sum_i C_i Cov(y_i,y_i) + 0 \quad \because \text{$y_i$ are indepedent} \\
+&= \frac{1}{n} \sum_i C_i Cov(y_i,y_i) + 0 \quad \because y_i \text{ are indepedent} \\
 &= \frac{1}{n} \sum_i C_i Var(y_i) = \frac{\sigma^2}{n} \sum_i C_i \\
 &= 0 \quad \because \sum \frac{(x_i -\bar{x})}{\sum (x_i -\bar{x}) ^2} = 0
 \end{aligned}
