@@ -101,14 +101,14 @@ $$
 <details>
 <summary>Note</summary>
 
-```math
+$`
 \begin{aligned}
 \text{Bias}(\hat{\theta}) &= E(\hat{\theta}) - \theta \\
 \\
 E[(\hat{y} - y)^2] &= E[(\hat{y} - E[\hat{y}])^2] + (E[\hat{y}] - y)^2 \\
 MSE & = Variance + Bias^2               
 \end{aligned}
-```
+`$
 
 Possible heuristic:
 
@@ -120,7 +120,7 @@ $Bias^2$ = how far is the average model from the actual
 
 Derivation:
 
-```math
+$`
 \begin{aligned}
 E[(y - \hat{y})^2] &= E[(f(x) - \hat{f}(x))^2] + \sigma_\epsilon^2 \\
 \\
@@ -132,7 +132,7 @@ E[(f(x) - \hat{f}(x))^2] &= E[((f(x)-E[\hat{f}(x)])- (\hat{f}(x)- E[\hat{f}(x)] 
 \because E[(E[\hat{f}(x)]- f(x))^2] \quad &\text{is the expectation of a constant}\\
 =& \text{Bias}[\hat{f}(x)]^2 + Var(\hat{f}(x))
 \end{aligned}
-```
+`$
 
 </details> <br>
 

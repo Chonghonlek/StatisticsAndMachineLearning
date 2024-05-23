@@ -30,15 +30,15 @@ $$
 
 <summary>Solving,</summary>
 
-$$
+$`
 \begin{aligned}
 n\hat{\beta_0} + \hat{\beta_1} \sum x_i &= \sum y_i \\
 n\hat{\beta_0} + n \bar{x}\hat{\beta_1} &= n \bar{y} \\
 \hat{\beta_0} &= \bar{y} - \hat{\beta_1}\bar{x} \tag{coefficient of $\beta_0$} \\
 \end{aligned}
-$$
+`$
 
-$$
+$`
 \begin{aligned}
 \text{sub $\beta_0$ into (2),} \quad \sum y_i x_i - (\bar{y} - \hat{\beta_1}\bar{x})\sum x_i - \hat{\beta_1} \sum x_i^2 &=0 \\
 \sum y_i x_i - \bar{y}\sum x_i - \hat{\beta_1}\bar{x}\sum x_i - \hat{\beta_1} \sum x_i^2 &=0 \\
@@ -46,7 +46,7 @@ $$
 \\
 \hat{\beta_1} = \frac{\sum y_i x_i - \frac{\sum y_i\sum x_i}{n}}{\sum x_i^2 - \frac{(\sum x_i)^2}{n}} \tag{coefficient of $\beta_1$}
 \end{aligned}
-$$
+`$
 
 </details>
 
@@ -104,18 +104,18 @@ $$
 <details>
 <summary>Proof</summary>
 
-```math
+$`
 \begin{aligned}
 E(\hat{\beta_0} ) &= E(\bar{y} - \hat{\beta_1}\bar{x}) \\
 &= \frac{1}{n} \sum(E(y_i)) - \frac{1}{n} \sum E(\hat{\beta_1} x_i) \\
 &= \frac{1}{n} \sum (\beta_0 + \beta_1x_i) - \frac{1}{n} \sum \beta_1 x_i \\
 & = \beta_0
 \end{aligned}
-```
+`$
 
 Lemma 1.2: $Cov(\bar{y},\hat{\beta_1}) = 0$
 
-```math
+$`
 \begin{aligned}
 Cov(\bar{y},\hat{\beta_1}) &= Cov(\frac{1}{n}\sum y_i,\sum C_i y_i), \quad C_i = \frac{(x_i -\bar{x})}{\sum (x_i -\bar{x}) ^2} \\
 &= \frac{1}{n} \sum_i Cov(y_i,C_iy_i) + \frac{1}{n} \sum\sum_{i \neq j} Cov(y_i,C_j,yj) \\
@@ -123,17 +123,17 @@ Cov(\bar{y},\hat{\beta_1}) &= Cov(\frac{1}{n}\sum y_i,\sum C_i y_i), \quad C_i =
 &= \frac{1}{n} \sum_i C_i Var(y_i) = \frac{\sigma^2}{n} \sum_i C_i \\
 &= 0 \quad \because \sum \frac{(x_i -\bar{x})}{\sum (x_i -\bar{x}) ^2} = 0
 \end{aligned}
-```
+`$
 
 We use Lemma 1.2 to proof the variance of $\hat{\beta_0}$
 
-```math
+$`
 \begin{aligned}
 Var(\hat{\beta_0}) &= Var(\bar{y} - \hat{\beta_1}\bar{x}) = Var(\bar{y}) + (\bar{x})^2 Var(\hat{\beta_1}) + 2 \bar{x}Cov(\bar{y},\hat{\beta_1}) \\
 & = \frac{\sigma^2}{n} + (\bar{x})^2\frac{\sigma^2}{\sum (x_i -\bar{x}) ^2} + 0 \quad \text{from Lemma 1.2} \\
 & = \sigma^2 (\frac{1}{n} + \frac{\bar{x}}{S_{XX}})
 \end{aligned}
-```
+`$
 
 </details> <br>
 
