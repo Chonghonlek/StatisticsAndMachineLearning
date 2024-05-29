@@ -219,7 +219,6 @@ In fact,
 
 $$
 T^2 = (\frac{\hat{\beta_1}}{\sqrt{MS_{res}/S_{XX}}})^2 = \frac{\hat{\beta_1}^2 S_{XX}}{MS_{res}} = \frac{\hat{\beta_1} S_{XY}}{MS_{res}} = \frac{MS_R}{MS_{res}} = F_0
-
 $$
 
 ## CI and Hypothesis testing for $\beta_0,\beta_1,\sigma^2$
@@ -229,6 +228,7 @@ Consider Lemma 1.3 : Suppose we have point estimate $\hat{\theta} \sim N(\theta,
 $$
 \begin{aligned}
 \text{if } \sigma^2 \text{ is known} &\rightarrow \hat{\theta} \pm z_{\alpha/2}\sigma \sqrt{c} \text{ is a } 100(1-\alpha)\% \text{ CI for } \theta \\
+\\
 \text{if } \sigma^2 \text{ is unknown} &\rightarrow \hat{\theta} \pm t_{\alpha/2}s \sqrt{c} \text{ is a } 100(1-\alpha)\% \text{ CI for } \theta \\
 \text{ and } s^2 \text{ is an unbiased estimator for } &\sigma^2
 \end{aligned}
@@ -264,7 +264,6 @@ $$
 \begin{aligned}
 \frac{\hat{\beta_1} - \beta_1}{\sqrt{MS_{res}\frac{1}{S_{XX}}}} &\sim t(n-2) \\
 \implies 100(1-\alpha)\% \text{ CI } &: \hat{\beta_1} \pm t_{\alpha/2}(n-2)\sqrt{MS_{res}}\sqrt{\frac{1}{\sum (x_i - \bar{x})^2}}
-
 \end{aligned}
 $$
 
