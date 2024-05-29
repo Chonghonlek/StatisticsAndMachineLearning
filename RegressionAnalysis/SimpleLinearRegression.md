@@ -299,11 +299,111 @@ $$
 
 ### Interval estimation of mean response
 
+A major use of regression model is to estimate the mean response $E(y)$.
 
-### Interval estimation of predicition
+A point estimator of $E(y)$ is 
 
+$$
+\hat{E(y)} = \hat{\mu_{y|x_0}} = \hat{\beta_0} + \hat{\beta_1}x_0
+$$
 
+To obtain an interval estimate, we consider
+
+$$
+\begin{aligned}
+Var(\hat{\mu_{y|x_0}} ) &= Var(\hat{\beta_0} + \hat{\beta_1}x_0) = Var(\bar{y} + \hat{\beta_1}(x_0 - \bar{x})) \\
+&= Var(\bar{y}) + (x_0 - \bar{x})^2Var(\hat{\beta_1}) \\
+&= \frac{\sigma^2}{n} + (x_0 - \bar{x})^2(\frac{\sigma^2}{S_{XX}}) \\
+&= \sigma^2 (\frac{1}{n} + \frac{(x_0 - \bar{x})^2}{S_{XX}})
+\end{aligned}
+$$
+
+Hence we have the sampling distribution:
+
+$$
+\frac{\hat{\mu_{y|x_0}} - E(y|x_0)}{\sqrt{MS_{res}(\frac{1}{n} + \frac{(x_0 - \bar{x})^2}{S_{XX}})}} \sim t(n-2)
+$$
+
+Using lemma 1.3, this gives us the CI:
+
+$$
+\hat{\mu_{y|x_0}} \pm t_{\alpha/2}(n-2)\sqrt{MS_{res}(\frac{1}{n} + \frac{(x_0 - \bar{x})^2}{S_{XX}})}
+$$
+
+in R:
+
+```r
+predict.lm(fitted.model, newdata, interval = "confidence", level = 0.95)
+```
+
+### Interval estimation of predicition (PI)
+
+An important application is to predict new observation $\hat{y}_{n+1}$ or $\hat{y}$ s.t. $\hat{y_0} = \hat{\beta_0} + \hat{\beta_1}x_0$
+
+Consider the r.v. : $\psi = y_0 - \hat{y_0}$, it is normally distributed with mean 0 and variance :
+
+$$
+Var(\psi) = Var(y_0 - \hat{y_0}) = \sigma^2(1 +\frac{1}{n} + \frac{(x_0 - \bar{x})^2}{S_{XX}} )
+$$
+
+Similarly, we can find the PI:
+
+$$
+\hat{y_0} \pm t_{\alpha/2}(n-2)\sqrt{MS_{res}(1+ \frac{1}{n} + \frac{(x_0 - \bar{x})^2}{S_{XX}})}
+$$
+
+Note that the PI is larger in range than the CI. CI measures where the population parameter is likely at. PI measures specific individual new observations (includes variance that come from error term)
+
+in r:
+
+```r
+predict.lm(fitted.model, newdata, interval = "prediction", level = 0.95)
+```
+
+We can generalise to get mean of m future observations where $\bar{y}_0$ is the mean of the m future observation. The corresponding PI on $\bar{y}_0$ is
+
+$$
+\hat{y_0} \pm t_{\alpha/2}(n-2)\sqrt{MS_{res}(\frac{1}{m}+ \frac{1}{n} + \frac{(x_0 - \bar{x})^2}{S_{XX}})}
+$$
 
 ## Coefficient of determination or $R^2$
 
+$R^2 = \frac{SS_R}{SS_T} = 1 - \frac{SS_{res}}{SS_T}$
+
+$R^2$ can be thought of as the proportion of variation explained by regressor x. 
+
+Because $0 \le SS_R \le SS_T$, it follows that $0\le R^2 \le 1$
+
+although $R^2$ doesnt decrease if we add a regressor variable this does not mean the new model is superior.
+
+Magnitutude of $R^2$ depends on the range of variability in the regressor variable.$R^2$ does not measure the magnitude of the slope of the regression line. A large value of $R^2$ does not imply a steep slope
+
+Consider the estimator - sample correlation coefficient, r
+
+$$
+r = \frac{\sum y_i(x_i - \bar{x})}{(\sum(x_i - \bar{x})^2 \sum (y_i - \bar{y})^2)^{1/2}} = \frac{S_{XY}}{(S_{XX}SS_T)^{1/2}}
+$$
+
+We can show that:
+
+$$
+\hat{\beta_1} = (\frac{SS_T}{S_{XX}})^{1/2} *r = \frac{S_{XY}}{S_{XX}}
+$$
+
+$$
+r^2 = \hat{\beta_1}^2(\frac{S_{XX}}{SS_T}) = \frac{\hat{\beta_1} S_{XY}}{SS_T} = \frac{SS_R}{SS_T} = R^2
+$$
+
+
+We can test the hypothesis:
+
+$$
+H_0 : \rho = 0, H_1 : \rho \ne 0
+$$
+
+An appropirate test statistic is :
+
+$$
+t_0 = \frac{r\sqrt{n-2}}{\sqrt{1-r^2}} \sim t(n-2)
+$$
 
