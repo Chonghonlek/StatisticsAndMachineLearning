@@ -22,8 +22,10 @@ $$
 $$
 
 $$
+\begin{aligned}
 \text{From (1),} \quad n\hat{\beta_0} + \hat{\beta_1} \sum x_i = \sum y_i \\
 \text{From (2),} \quad \hat{\beta_0}\sum x_i + \hat{\beta_1} \sum x_i^2 = \sum y_i x_i
+\end{aligned}
 $$
 
 <details>
@@ -140,7 +142,7 @@ Gauss Markov theorem states that for the regression model, the least squares est
 
 ### Other useful properties of the least square fit
 
-1. Sum of the residuals is always zero : $ \sum (y_i - \hat{y_i}) = \sum e_i = 0$
+1. Sum of the residuals is always zero : $\sum (y_i - \hat{y_i}) = \sum e_i = 0$
 2. Sum of observed values equal sum of fittec values: $\sum y_i  = \sum \hat{y_i}$
 3. Least squares regression line passes through the centroid $(\bar{x},\bar{y})$ : $\bar{y} = \hat{\beta_0} + \hat{\beta_1}\bar{x}$ (shown above)
 4. Sum of residuals weighted by value of regressor is 0 : $\sum x_i e_i = 0$
