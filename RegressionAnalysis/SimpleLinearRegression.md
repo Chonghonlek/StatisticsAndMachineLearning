@@ -263,7 +263,8 @@ Then using lemma 1.3 and unknown $\sigma^2$ which we estimate using $MS_{res}$,
 $$
 \begin{aligned}
 \frac{\hat{\beta_1} - \beta_1}{\sqrt{MS_{res}\frac{1}{S_{XX}}}} &\sim t(n-2) \\
-\implies 100(1-\alpha)\% \text{ CI } &: \hat{\beta_1} \pm t_{\alpha/2}(n-2)\sqrt{MS_{res}}\sqrt{\frac{1}{\sum (x_i - \bar{x})^2}}
+\implies 100(1-\alpha)\% \text{ CI } &: \\
+\hat{\beta_1} \pm t_{\alpha/2}(n-2)\sqrt{MS_{res}}\sqrt{\frac{1}{\sum (x_i - \bar{x})^2}}
 \end{aligned}
 $$
 
@@ -278,7 +279,8 @@ Then using lemma 1.3 and unknown $\sigma^2$ which we estimate using $MS_{res}$,
 $$
 \begin{aligned}
 \frac{\hat{\beta_0} - \beta_0}{\sqrt{MS_{res}(\frac{1}{n} + \frac{\bar{x}^2}{S_{XX}})}} &\sim t(n-2) \\
-\implies 100(1-\alpha)\% \text{ CI } &: \hat{\beta_0} \pm t_{\alpha/2}(n-2)\sqrt{MS_{res}}\sqrt{(\frac{1}{n} + \frac{\bar{x}^2}{S_{XX}})}
+\implies 100(1-\alpha)\% \text{ CI } &: \\
+\hat{\beta_0} \pm t_{\alpha/2}(n-2)\sqrt{MS_{res}}\sqrt{(\frac{1}{n} + \frac{\bar{x}^2}{S_{XX}})}
 \end{aligned}
 $$
 
