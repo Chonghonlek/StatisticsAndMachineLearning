@@ -1,4 +1,6 @@
-# Classification
+Notes taken from  **Gareth J et al., An introduction to Statistical Learning**
+
+## Classification
 
 Compared to linear regression, we are trying to predict qualitative response. 
 

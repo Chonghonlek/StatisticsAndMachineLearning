@@ -1,3 +1,5 @@
+Notes taken from  **Gareth J et al., An introduction to Statistical Learning**
+
 # StatisticalLearning
 
 ## What are we trying to solve in Stats learning

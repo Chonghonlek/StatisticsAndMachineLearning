@@ -181,3 +181,128 @@ $$
 \hat{\sigma^2} =MS_{res} = \frac{SS_{res}}{n-2}
 $$
 
+## Testing significance of regression
+
+Suppose we test the significance of the regression this is the same as :
+
+$$
+H_0 : \beta_1 = 0, H_1 : \beta_1 \ne 0
+$$
+
+if we fail to reject, this implies that there is no linear relationship between x and y
+
+Here, $t = \frac{\hat{\beta_1} - 0}{SE(\beta_1)}$ and we reject null hypothesis, $H_0 \iff |t| > t_{\alpha/2}(n-2)$
+
+In fact, this is the same as conducting an **Anova (one-way)  F-test** on the simple linear regression model. 
+
+note: Anova - analysis of variance
+
+Recall:
+
+$$
+SS_T = SS_{res} + SS_{R}\iff \sum (y_i - \bar{y})^2 = \sum (y_i - \hat{y_i})^2 + \sum (\hat{y_i} - \bar{y})^2
+$$
+
+Here, $df_T = n-1, \quad df_R = 1, \quad df_{res} = n-2$
+
+$$
+\implies F_0 = \frac{SS_R / df_R}{SS_{res}/df_{res}} = \frac{SS_r/1}{SS_{res}/(n-2)} = \frac{MS_R}{MS_{res}}
+$$
+
+We can set up this way because,  $SS_R/\sigma^2 \sim \chi^2(1) \quad \because \frac{(\hat{y_i} - \bar{y})^2}{\sigma^2} = z^2$
+
+and under $H_0$ where $\beta_0 = 0$, $F_0 = \frac{MS_R}{MS_{res}} = 0 \quad \because SS_R = \hat{\beta_1}S_{XY}$
+
+we reject $H_0$ if $F_0 > F_{\alpha,1,n-2}$, which implies there is a linear relationship
+
+In fact,
+
+$$
+T^2 = (\frac{\hat{\beta_1}}{\sqrt{MS_{res}/S_{XX}}})^2 = \frac{\hat{\beta_1}^2 S_{XX}}{MS_{res}} = \frac{\hat{\beta_1} S_{XY}}{MS_{res}} = \frac{MS_R}{MS_{res}} = F_0
+
+$$
+
+## CI and Hypothesis testing for $\beta_0,\beta_1,\sigma^2$
+
+Consider Lemma 1.3 : Suppose we have point estimate $\hat{\theta} \sim N(\theta,c\sigma^2)$
+
+$$
+\begin{aligned}
+\text{if } \sigma^2 \text{ is known} &\rightarrow \hat{\theta} \pm z_{\alpha/2}\sigma \sqrt{c} \text{ is a } 100(1-\alpha)\% \text{ CI for } \theta \\
+\text{if } \sigma^2 \text{ is unknown} &\rightarrow \hat{\theta} \pm t_{\alpha/2}s \sqrt{c} \text{ is a } 100(1-\alpha)\% \text{ CI for } \theta \\
+\text{ and } s^2 \text{ is an unbiased estimator for } &\sigma^2
+\end{aligned}
+$$
+
+<details>
+
+<summary>proof for unknown sd </summary>
+
+```math
+\begin{aligned}
+s^2 \text{ is an unbiased estimator for } \sigma^2 \iff \frac{rs^2}{\sigma^2} \sim \chi^2(r) \\
+
+\frac{z}{\sqrt{\frac{\chi^2(r)}{r}}} = t(r) \implies \frac{\frac{\hat{\theta} - \theta}{\sqrt{c\sigma^2}}}{\sqrt{\frac{rs^2}{\sigma^2}} \frac{1}{r}} = \frac{\frac{\hat{\theta} - \theta}{\sqrt{c\sigma^2}}}{\frac{s}{\sigma}} = \frac{\hat{\theta} - \theta}{s\sqrt{c}} \sim t(r) \\
+
+\implies P(-t_{\alpha/2}(r) \le \frac{\hat{\theta} - \theta}{s\sqrt{c}} \le t_{\alpha/2}(r)) = 1- \alpha \\
+
+\implies P(\theta - t_{\alpha/2}(r)s\sqrt{c} \le \hat{\theta} \le \theta + t_{\alpha/2}(r)s\sqrt{c}) = 1- \alpha 
+\end{aligned}
+```
+
+</details> <br>
+
+#### $\beta_1$ :
+
+$$
+\hat{\beta_1} = \frac{\sum y_i(x_i -\bar{x})}{\sum (x_i -\bar{x}) ^2} \sim N(\beta_1, \frac{\sigma^2}{S_{XX}})
+$$
+
+Then using lemma 1.3 and unknown $\sigma^2$ which we estimate using $MS_{res}$,
+
+$$
+\begin{aligned}
+\frac{\hat{\beta_1} - \beta_1}{\sqrt{MS_{res}\frac{1}{S_{XX}}}} &\sim t(n-2) \\
+\implies 100(1-\alpha)\% \text{ CI } &: \hat{\beta_1} \pm t_{\alpha/2}(n-2)\sqrt{MS_{res}}\sqrt{\frac{1}{\sum (x_i - \bar{x})^2}}
+
+\end{aligned}
+$$
+
+#### $\beta_0$ :
+
+$$
+\hat{\beta_0} = \bar{y} - \hat{\beta_1}\bar{x} \sim N(\beta_0,(\frac{1}{n} + \frac{\bar{x}^2}{S_{XX}})\sigma^2)
+$$
+
+Then using lemma 1.3 and unknown $\sigma^2$ which we estimate using $MS_{res}$,
+
+$$
+\begin{aligned}
+\frac{\hat{\beta_0} - \beta_0}{\sqrt{MS_{res}(\frac{1}{n} + \frac{\bar{x}^2}{S_{XX}})}} &\sim t(n-2) \\
+\implies 100(1-\alpha)\% \text{ CI } &: \hat{\beta_0} \pm t_{\alpha/2}(n-2)\sqrt{MS_{res}}\sqrt{(\frac{1}{n} + \frac{\bar{x}^2}{S_{XX}})}
+\end{aligned}
+$$
+
+#### $\sigma^2$ :
+
+$$
+\begin{aligned}
+\frac{(n-2)MS_{res}}{\sigma^2_0} &\sim \chi^2(n-2) \\
+\implies 
+100(1-\alpha)\% \text{ CI } &: \\
+\frac{(n-2)MS_{res}}{\chi^2_{\alpha/2 ,n-2}} \le &\sigma^2  \le \frac{(n-2)MS_{res}}{\chi^2_{ 1- \alpha/2 ,n-2}} \quad &\text{note: } \chi^2_{ 1- \alpha/2 ,n-2} \text{ is smaller. } \\
+&& 1-\alpha/2 \text{ refer to right, not lower tail} \\
+\end{aligned}
+$$
+
+
+### Interval estimation of mean response
+
+
+### Interval estimation of predicition
+
+
+
+## Coefficient of determination or $R^2$
+
+

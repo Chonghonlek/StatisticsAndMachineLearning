@@ -1,3 +1,5 @@
+Notes taken from  **Gareth J et al., An introduction to Statistical Learning**
+
 ## Logistic Regression
 
 To avoid the problem of probability falling beyond $[0,1]$, we model $p(X)$ using a function that gives the outputs between 0 and 1 for all values of X. 
