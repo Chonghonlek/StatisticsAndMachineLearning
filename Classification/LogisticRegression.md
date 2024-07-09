@@ -1,6 +1,6 @@
 Notes taken from  **Gareth J et al., An introduction to Statistical Learning**
 
-## Logistic Regression
+# Logistic Regression
 
 To avoid the problem of probability falling beyond $[0,1]$, we model $p(X)$ using a function that gives the outputs between 0 and 1 for all values of X. 
 
@@ -75,4 +75,28 @@ $$
 
 and we use MLE to estimate $\beta_0 ,\beta_1  \cdots \beta_p$
 
+## Multinomial Logistic regression
 
+In cases for more than 2 response classes i.e. K >2
+
+We select a single class to serve as a baseline; WLOG, we select the Kth class for this role,
+
+$$
+\begin{aligned}
+P(Y=k|X=x) &= \frac{e^{\beta_{Kk0} + \beta_{k1}X_1 + \cdots \beta_{kp}X_p}}{1 + \sum_{l=1}^{K-1} e^{\beta_{lk0} + \beta_{l1}X_1 + \cdots \beta_{lp}X_p}} \quad \text{for } k = 1,\dotsc,k-1 \\
+\text{and}\\
+P(Y=K|X=x) &= \frac{1}{1 + \sum_{l=1}^{K-1} e^{\beta_{lk0} + \beta_{l1}X_1 + \cdots \beta_{lp}X_p}} \quad \text{for baseline } Y=K \\
+\\
+\\
+\text{in fact, for }  k = 1,\dotsc,k-1\\
+\log \frac{P(Y=k|X=x)}{P(Y=K|X=x)} &= \beta_{Kk0} + \beta_{k1}X_1 + \cdots \beta_{kp}X_p
+\end{aligned}
+$$
+
+**the last equation allows us to find the logodds between any k class against the baseline**
+
+The decision to treat the Kth class as the baseline is not important. The coeffients estimates will differ between the fitted model based on the choice of baseline. but the fitted values/prediction and the log odds between any pair of classes and other key model outputs remain the same. 
+
+still, the interpretation of the coefficients is tied to the baseline. from the book example, if select seizure as baseline, we can interpret $\beta_{stroke0}$ as the log odds of strike vs seizure, given that $x_1,\cdots,x_p = 0$. And if $X-j$ increases by 1 unit then $ \log \frac{P(Y=stroke|X=x)}{P(Y=seizure|X=x)}$ increases by $e^{\beta_{strokej}}$
+
+(we introduce softmax coding another time)

@@ -37,7 +37,7 @@ E(Y - \hat{Y})^2 &= E(f(X) + \epsilon - \hat{f}(X))^2 \\
 ## Estimating $\hat{f}$
 Most statistical learning methods can be characterised as either parametric or non-parametric
 
-In parametric approach, we make assumption about the function form or shape of $f$ and we estimate its parameters by fitting training data. This approach redices the problem of estimating $f$ down to estimating a set of praremeters. The disadvantage of a parametric approach is that the model we choose will usually not match the true unknown form of $f$. We can address this problem with more flexible models but this will require estimating more parameters and lead to overfitting(following noise too closely)
+In parametric approach, we make assumption about the function form or shape of $f$ and we estimate its parameters by fitting training data. This approach reduces the problem of estimating $f$ down to estimating a set of paremeters. The disadvantage of a parametric approach is that the model we choose will usually not match the true unknown form of $f$. We can address this problem with more flexible models but this will require estimating more parameters and lead to overfitting(following noise too closely)
 
 In the non-parametric approach, we dont make assumptions about the form of $f$. Instead we seek an estimate of f that gets close to the data points as possible. By avoiding the assumption of a particular form for $f$, they have the potential to accruately fit a wider range fo psossible shapes for $f$. But the non-parametric approach may suffer from a disadvatange - which is a large number of observations will be required in order to obtain an accurate estimation of $f$. This approach is also prone to overfitting
 
@@ -82,7 +82,7 @@ In other words we compute the averaged squared prediction error : $Avg(y_0 - \ha
 
 If no test data is available, we select the learning method that minimises the _training MSE_ instead
 
-![figure 2.9 Taken from Gareth J et al](images/Screenshot%202024-05-20%20Figure2.9%20G%20James.png)
+![figure 2.9 Taken from G James et al](images/Screenshot%202024-05-20%20Figure2.9%20G%20James.png)
 
 From the above figure, we see the tradeoff between flexibility and MSE. As we add in more parameters/Degree of freedoms, training MSE falls. However, test MSE will only fall until a certain point, after which test MSE rises due to overfitting of the model. ie when a small trainig MSE leads to a large test MSE we say this to be overfitting the data. 
 
@@ -189,7 +189,7 @@ Suppose K = 3, KNN identifies the 3 observations closest to the point x_0 and co
 
 In fact, we can see that the KNN decision boundary is similar to the bayes decision boundary.
 
-![Figure2.16 KNN from Gareth J et al](images/Screenshot%202024-05-20%20Figure2.16%20Gareet%20J.png)
+![Figure2.16 KNN from G James et al](images/Screenshot%202024-05-20%20Figure2.16%20Gareet%20J.png)
 
 However when K = 1, we see that the decision boundary is overly flexible and finds patterns that dont correspond to the bayes decision boundary, this corresponds to low bias and high variance.
 As K increases, the method becomes less flexible and produices a decision boundary that is close to linear. This corresponds to high bias and low variance.
@@ -199,5 +199,22 @@ Plotting the KNN training error and test error against level of flexibility (1/K
 in both regression and classification, choose the level of flexibility is critical to success of any statistical learning method. There are ways to estimate test error rates and choosing the level of flexibility for a given method (to be discussed later).
 
 
+### Improving accuracy of models 
+
+(taken outside of book)
+
+1) Data preprocessing  - removing outliers, standardisation or normalization of data
+2) Feature engineering - seledtcing or creating informative features that significantly improve model accuracy
+3) Hyper parameter tuning - grid search on optimal combinations of hyperparameters
+4) Model selection - comparing models, ensembling models / deep learning models
+
+### Mitigating Overfitting of models
+
+(taken outside of book)
+
+1) Feature selection - selecting the most important features
+2) Train test split and cross validation - one technique is k-fold cross validation
+3) Regularization - includes L1 and L2 regularization techniques that penalises large and complex models
+4) Ensemble models - like random forest and gradient boosting
 
 
