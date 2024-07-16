@@ -83,13 +83,13 @@ We select a single class to serve as a baseline; WLOG, we select the Kth class f
 
 $$
 \begin{aligned}
-P(Y=k|X=x) &= \frac{e^{\beta_{Kk0} + \beta_{k1}X_1 + \cdots \beta_{kp}X_p}}{1 + \sum_{l=1}^{K-1} e^{\beta_{lk0} + \beta_{l1}X_1 + \cdots \beta_{lp}X_p}} \quad \text{for } k = 1,\dotsc,k-1 \\
+P(Y=k|X=x) &= \frac{e^{\beta_{k0} + \beta_{k1}X_1 + \cdots \beta_{kp}X_p}}{1 + \sum_{l=1}^{K-1} e^{\beta_{lk0} + \beta_{l1}X_1 + \cdots \beta_{lp}X_p}} \quad \text{for } k = 1,\dotsc,k-1 \\
 \text{and}\\
-P(Y=K|X=x) &= \frac{1}{1 + \sum_{l=1}^{K-1} e^{\beta_{lk0} + \beta_{l1}X_1 + \cdots \beta_{lp}X_p}} \quad \text{for baseline } Y=K \\
+P(Y=K|X=x) &= \frac{1}{1 + \sum_{l=1}^{K-1} e^{\beta_{l0} + \beta_{l1}X_1 + \cdots \beta_{lp}X_p}} \quad \text{for baseline } Y=K \\
 \\
 \\
 \text{in fact, for }  k = 1,\dotsc,k-1\\
-\log \frac{P(Y=k|X=x)}{P(Y=K|X=x)} &= \beta_{Kk0} + \beta_{k1}X_1 + \cdots \beta_{kp}X_p
+\log \frac{P(Y=k|X=x)}{P(Y=K|X=x)} &= \beta_{k0} + \beta_{k1}X_1 + \cdots \beta_{kp}X_p
 \end{aligned}
 $$
 
@@ -97,6 +97,6 @@ $$
 
 The decision to treat the Kth class as the baseline is not important. The coeffients estimates will differ between the fitted model based on the choice of baseline. but the fitted values/prediction and the log odds between any pair of classes and other key model outputs remain the same. 
 
-still, the interpretation of the coefficients is tied to the baseline. from the book example, if select seizure as baseline, we can interpret $\beta_{stroke0}$ as the log odds of strike vs seizure, given that $x_1,\cdots,x_p = 0$. And if $X-j$ increases by 1 unit then $ \log \frac{P(Y=stroke|X=x)}{P(Y=seizure|X=x)}$ increases by $e^{\beta_{strokej}}$
+still, the interpretation of the coefficients is tied to the baseline. from the book example, if select seizure as baseline, we can interpret $\beta_{stroke0}$ as the log odds of stroke vs seizure, given that $x_1,\cdots,x_p = 0$. And if $X_j$ increases by 1 unit then $\frac{P(Y=stroke|X=x)}{P(Y=seizure|X=x)}$ increases by $e^{\beta_{strokej}}$
 
 (we introduce softmax coding another time)

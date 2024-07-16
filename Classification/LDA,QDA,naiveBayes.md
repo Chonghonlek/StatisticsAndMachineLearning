@@ -179,7 +179,7 @@ We go back to the bias-variance trade off. For p predictors,
 - LDA estimates the covariance matrix that requires ${p\choose2} = p(p+1)/2$ parameters
 - QDA requires each kth class to have its own covariance matrix and thus estimates $K * p(p+1)/2$ parameters
 
-Consequently this means that LDA is much less flexible classifier than QDA and has thus lower variance - that allows it to perform better with new data set. 
+Consequently Less predictors means that LDA is much less flexible classifier than QDA and has thus lower variance - that allows it to perform better with new data set. 
 
 However, if the assumption that K classes share the same covariance matrix is very off, then LDA suffers from high bias
 
@@ -196,7 +196,7 @@ Instead of assuming that the function $f_k(x)$ - likelihood belongs to a particu
 
 By doing this, we eliminate the need to worry about the association between the p predictors. 
 
-In most settings, we do not believe that the naive bayes assumption that p covariates are indepedent within each class. but even though this modelling assumption is made for convenience , it often leads to pretty decent results. Especially in settings where n is not large enough relative to p for us to effectively estimate the joint distribution of predictors within each class.
+In most settings, we do not believe that the naive bayes assumption that p covariates are indepedent within each class. but even though this modelling assumption is made for convenience, it often leads to pretty decent results. Especially in **settings where n is not large enough relative to p for us to effectively estimate the joint distribution of predictors within each class.**
 
 The expression for the posterior probability for $k = 1\cdots K$ :
 
@@ -221,6 +221,6 @@ that $\hat{\pi_1} = \hat{\pi_2}= 0.5$
 
 Now suppose that we wish to classify a new observation, $x^∗ = (0.4, 1.5, 1)^T$. It turns out that in this example, $\hat{f_{11}}(0.4) = 0.368, \hat{f_{12}}(1.5) = 0.484, \hat{f_{13}}(1) = 0.226$, and $\hat{f_{21}}(0.4) =0.030, \hat{f_{22}}(1.5) = 0.130, \hat{f_{23}}(1) = 0.616$. Plugging these estimates results in posterior probability estimates of $Pr(Y = 1|X = x^∗) = 0.944$ and $Pr(Y = 2|X = x^∗) = 0.056$.
 
-In this example, it should not be too surprising that naive Bayes does not convincingly outperform LDA: this data set has n = 10,000 and p = 4,and so the **reduction in variance resulting from the naive Bayes assumption is not necessarily worthwhile**. 
+In this example, it should not be too surprising that naive Bayes does not convincingly outperform LDA: this data set has n = 10,000 and p = 3,and so the **reduction in variance resulting from the naive Bayes assumption is not necessarily worthwhile**. 
 
-We expect to see a greater pay-off to using naive Bayes relative to LDA or QDA in instances where **p is larger or n is smaller**, so that reducing the variance is very important
+We expect to see a greater pay-off to using naive Bayes relative to LDA or QDA in instances where **p is larger or n is smaller** (result in higher variance), so that reducing the variance is very important
