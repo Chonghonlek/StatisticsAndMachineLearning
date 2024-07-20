@@ -41,24 +41,24 @@ $$
 \end{aligned}
 $$
 
-It is more convenient to deal with this using matrix notation: $\bold{y = X \beta + \epsilon}$
+It is more convenient to deal with this using matrix notation: $y = X \beta + \epsilon$
 
 $$
 \begin{aligned}
-&\bold{y} =
+&y =
 \begin{pmatrix}
 y_1\\y_2\\ \vdots \\ y_n
-\end{pmatrix}, \quad && \bold{X} = 
+\end{pmatrix}, \quad && X = 
 \begin{pmatrix}
 1 & x_{11} &\cdots & x_{1k}\\
 1 & x_{21} &\cdots & x_{2k}\\
 \vdots & \vdots & &\vdots\\
 1 & x_{n1} &\cdots & x_{nk}
 \end{pmatrix} \\
-&\bold{\beta} = 
+&\beta = 
 \begin{pmatrix}
 \beta_1\\ \beta_2\\ \vdots \\ \beta_k
-\end{pmatrix}, \quad &&\bold{\epsilon} = 
+\end{pmatrix}, \quad && \epsilon = 
 \begin{pmatrix}
 \epsilon_1 \\ \epsilon_2 \\ \vdots \\ \epsilon_n
 \end{pmatrix}
@@ -83,7 +83,7 @@ y_1\\y_2\\ \vdots \\ y_n
 \end{pmatrix}
 $$
 
-We now proceed to find the vector of least squares estimatators $\bold{\hat{\beta}}$
+We now proceed to find the vector of least squares estimatators $\hat{\beta}$
 
 $$
 \begin{aligned}
@@ -169,7 +169,7 @@ Var(\hat{\beta}) &= Var((X'X)^{-1}X'y) = (X'X)^{-1}X' Var(y)[(X'X)^{-1}X']' \qua
 \end{aligned}
 $$
 
-If we let $C=(X'X)^{-1}$, then $Var(\hat{\beta}_j) = \sigma^2 C_{jj}$ and $Cov(\hat{\beta}_i,\hat{\beta}_j) = = \sigma^2 C_{ij}$
+If we let $C=(X'X)^{-1}$, then $Var(\hat{\beta}_j) = \sigma^2 C_{jj}$ and $Cov(\hat{\beta}_i,\hat{\beta}_j)  = \sigma^2 C_{ij}$
 
 infact, The Gauss-Markov Theorem (not discussed here) establishes that the least squares estimator $\hat{\beta}$ is the best linear unbiased estimator of $\beta$. Also, if we further assume error sare normally distributed then the  $\hat{\beta}$ is also the MLE of $\beta$. the MLE is the minimum variance unbiased estimator of $\beta$
 
@@ -446,4 +446,234 @@ predict.lm(fitted.model, newdata = dataframe(...), interval = 'confidence', leve
 
 ## Simulatenous Confidence Intervals on Regression Coefficients
 
+A set of confidence or prediction interval that is true simultaenously  with probability $1-\alpha$ are called simulatenous or joint confidence/predicition intervakl
 
+We define a joint confidence region for the multiple regression model. (proof not shown) We may show that 
+
+$$
+\frac{(\hat{\beta} - \beta)'X'X(\hat{\beta} - \beta) /p}{MS_{res}} \sim F_{p,n-p}
+$$
+
+Construction of this joint interval is relatiely straightforward for p = 2 (simple linear regression) $\frac{(\hat{\beta} - \beta)'X'X(\hat{\beta} - \beta) /2}{MS_{res}} < F_{\alpha,2,n-2}$
+
+$$
+\frac{
+\begin{pmatrix}
+    \hat{\beta_0} - \beta_0 &\hat{\beta_1} - \beta_1
+\end{pmatrix}
+\begin{pmatrix}
+    n & \sum x_i \\ \sum x_i & \sum x_i^2
+\end{pmatrix}
+\begin{pmatrix}
+    \hat{\beta_0} - \beta_0  \\ \hat{\beta_1} - \beta_1
+\end{pmatrix} /2
+}{MS_{res}} =
+\frac{n(\hat{\beta_0} - \beta_0)^2 + 2(\hat{\beta_0} - \beta_0)(\hat{\beta_1} - \beta_1)\sum x_i + (\hat{\beta_1} - \beta_1)^2 \sum x_i^2}{2 MS_{res}}< F_{\alpha,2,n-2}
+$$
+
+![Figure 3.8 from Douglas M et al](../images/Screenshot%202024-07-17%20Fig3.8%20D%20Montgomery.png)
+
+this joint confidence regionis an ellipsoidal region. The tilt of the ellipse is a function of the covariance between $\hat{\beta_0}$ and $\hat{\beta_1}$ 
+- A positive covariance implies that errors in the point estimates of beta are likely to be in the same direction, while a negative covariance indicates that these errors are likely to be in opposite direction.
+- The elongation of the region depends on the relative sizes of the variances of $\beta_0$ and $\beta_1$  Generally, if the ellipse is elongated in the $\beta_0$ direction, this implies that $\beta_0$ is not estimated as precisely as $\beta_1$
+
+### Alternative approach: Bonferroni CI
+
+We now construct a $(1 - \frac{\alpha}{m}) 100$% CI for each parameter. this can provide us a joint coverage probability of $\ge 1 - \alpha$
+
+this is called a bonferroni confidence region - which is a rectangular region. uses principle of bonferroni inequality
+
+For p intervals, $\hat{\beta_j} \pm t_{\alpha /2p} (n-p) \sqrt{\hat{\sigma^2}C_{jj}}$
+
+## hidden extrapolation in multiple regression
+
+In predicting new responses and in estimating mean response with a given point $x_0$, one must be careful about extrapolating beyond the region of the original observations
+
+![Figure 3.10 from Douglas M et al](../images/2024-07-17%20Fig3.10%20D%20Montgomery.png)
+
+the point on $x_{01}$ and $x_{02}$ is beyond range of experiment, even though it lies in range of both regressor. 
+
+we define the smallest convex set containing all original data point as the regressor variable hull (RVH)
+- if $x_0 \in RVH \implies$ interpolation
+- if $x_0 \notin RVH \implies$ extrapolation
+
+In fact the hat values (diagonals $h_{ii}$ of the hat matrix - $H = X(X'X)^{-1}X'$) are useful in detecting hidden extrapolation. 
+- $h_{ii}$ depends on both the euclidean distance of the point $x_0$ from the centriod and the density of points in the RVH. 
+- In general the point with largest $h_{ii}$ or $h_{max}$ will lie on the boundary of RVH
+- $\{ x|X(X'X)^{-1}X' \lt h_{max}\}$ represents an ellipsoid containing all points in the RVH
+- if we are interested in predicting or estimating at point $x_0$, the location of that point relative to RVH is reflected by 
+  
+$$
+h_{00} = x_0(X'X)^{-1}x_0'
+$$
+- if $h_{00} > h_{max} \implies x_0$ is outside ellipsoid
+- if $h_{00} \le h_{max} \implies x_0$ is inside ellipsoid but could be inside RVH
+
+to get the hat values, we call in r
+
+```r
+H = X %*% XPXI %*% t(X)
+Hii = diag(H)
+```
+
+to get $h_{00}$, we call in r
+
+```r
+x0 = array(x(1,20,250),dim =3)
+H00 = t(x0) %*% XPXI %*% x0
+```
+
+Note that $x0$ in the code is a column vector
+
+## Standardised regression coefficient
+
+We compare regression coefficients by using standardized regression coefficients.
+
+### Unit Normal Scaling (standardised normal)
+
+$$
+z_{ik} = \frac{x_{ij} - \bar{x_j}}{s_j}, \text{where } s^2_j = \frac{\sum (x_{ij} - \bar{x_j})^2}{n-1} \quad \text{ is the sample variance of regressor}
+$$
+
+and 
+
+$$
+y^*_i = \frac{y_i - \bar{y}}{\sqrt{\frac{1}{n-1}\sum (y_i - \bar{y})^2}}
+$$
+
+All the scaled regressors and scaled responses have sample mean = 0 and sample variance equal to 1
+
+Using the new variables, the regression model becomes $y^*_i = b_1 z_{i1} + \cdots + b_kz_{ik} + \epsilon_i$ and $Z^TZ \hat{b} = Z^T y$
+
+the least squares estimator of b is then : $\hat{b} = (Z^TZ )^{-1}Z^T y^*$
+
+Note: there is no intercept in this model
+
+### Unit Length Scaling
+
+we set : 
+
+$$
+w_{ik} = \frac{x_{ij} - \bar{x_j}}{s_{jj}^{1/2}}, \text{where } s_{jj} = \sum (x_{ij} - \bar{x_j})^2 \quad \text{ is the corrected sum of squares for regressor }
+$$
+
+and 
+
+$$
+y^0_i = \frac{y_i - \bar{y}}{\sqrt{\sum (y_i - \bar{y})^2}}
+$$
+
+Each new regressor has mean = 0 and length $\sqrt{\sum (w_{ij} - \bar{w_i})^2} = 1$
+
+- sum of $w_{ik} = 0$
+
+the regression model is $y^0_i = b_1 w_{i1} + \cdots + b_kw_{ik} + \epsilon_i$
+
+similarly, the least squares regression coefficient is $\hat{b} = (W^TW )^{-1}W^T y^0$
+
+In fact for the unit length scaled variables, the off diagonals of $W^TW$ are the correlation coefficient of regression variables. $r_{ij}$ is the correlation coefficient between $x_i$ and $x_j$. **This is known as correlation matrix**
+
+$$
+W^TW = \begin{pmatrix}
+    1 &r_{12} &\cdots &r_{1k} \\
+    r_{21} &1 & \cdots &r_{2k} \\
+    \vdots &\vdots & &\vdots \\
+    r_{k1} &r_{k2} &\cdots &1
+\end{pmatrix}
+$$
+
+Recall that 
+
+$$
+r_{ij} = \frac{S_{ij}}{\sqrt{S_{ii}S_{jj}}} = \frac{\sum_k (x_{kj} - \bar{x_i})(x_{kj} - \bar{x_j})}{\sqrt{\sum (x_{ik} - \bar{x_i})^2 \sum (x_{jk} - \bar{x_j})^2}}
+$$
+
+and 
+
+$$
+W^T y^0 = \begin{pmatrix}
+    r_{1y} \\ r_{2y} \\ \vdots \\r_{ky}
+\end{pmatrix} \quad \text{where } r_{jy} \text{ is the simple correlation between regressor and response}
+$$
+
+<details>
+
+<summary>proof</summary>
+
+$$
+\text{the first entry of }W^T y^0 \implies w_{11}y_1 + \cdots + w_{n1}y_n = \sum_k \frac{(x_{k1} - \bar{x_1})(y_k - \bar{y})}{\sqrt{\sum (x_{k1} - \bar{x_1})^2 \sum (y_k - \bar{y})^2}} = r_{1 y}
+$$
+
+from here,
+
+$$
+r_{jy} = \frac{S_{jy}}{\sqrt{SS_T S_{jj}}} = \frac{\sum_k (x_{kj} - \bar{x_i})(y_k - \bar{y})}{\sqrt{\sum (x_{ik} - \bar{x_i})^2 \sum (y_k - \bar{y})^2}}
+$$
+
+</details>
+
+Note that : $Z^TZ = (n-1)W^TW \iff \frac{1}{n-1}Z^TZ = W^TW$
+
+The rationale for scaling :
+- regression coefficients can be compared meaningfully because of they now have a common unit of measurement
+- reduce effect of multicollinearity(next part)
+- response variable is caled so that resulting model has intercept term that is zero. 
+
+<details>
+
+<summary>proof that intercept is 0</summary>
+
+we set $S = \sum(y_i^0 - \hat{y_i^0})^2$
+
+$$ 
+\begin{aligned}
+    \frac{\partial S}{\partial b_0} &= \sum 2 (y_i^0 - (b_0 + b_1 w_{i1} + \cdots + b_kw_{ik})) \quad \text{set to } 0 \\
+    \sum y_i^0  &= \sum (b_0 + b_1 w_{i1} + \cdots + b_kw_{ik}) \\
+    \sum y_i^0 &= nb_0 + b_1 \sum w_{i1} + \cdots + b_k \sum w_{ik}\\
+    \because \text{sum of } w_{ik} = 0, &\implies \hat{b_0} = 0
+\end{aligned}
+$$
+
+</details>
+
+## Multicollinearity (brief discussion)
+
+Multicollinearity is the near linear-dependence among the regressor variables. An exact linear depedence leads to a singular $X^TX$ The presence of near-linear dependence would result in the inability to estimate regression coefficients accurately. 
+
+### VIFs - variance inflation factors as a diagnostic for multicollinearity 
+
+Suppose we use the unit length scaling so that $X^TX = W^TW$. this wiy we get the form of a **correlation matrix**
+
+E.g. : $W^TW = \begin{pmatrix} 1 &0.824 \\ 0.824 &1 \end{pmatrix}$ and $(W^TW)^{-1} = \begin{pmatrix} 3.11841 &-2.57 \\ -2.57 &3.11841\end{pmatrix}$
+
+this implies $Var(\hat{b_1}) = Var(\hat{b_2}) = 3.11841 \sigma^2$. Here variances are inflated due to multicollinearity, this is evident from the non-zero off-diagonal elements in $W^TW$ - which the correlation between the regressor.
+
+
+
+Main diagonals of $(X^TX)^{-1}$ are called **variance inflation factors (VIFs)**
+
+From above example, $VIF_1 = VIF_2 = 3.11841$
+- if VIF =1 , then the regressors are orthogonal
+- in fact, we can show that $VIF_j = \frac{1}{1-R^2_j}$ where $R^2_j$ is the coefficient of multiple determination obtained from regressing $X_j$ against other regression coefficient
+
+If $X_j$ is nearly dependent on some subset of remaining regressor variables. $R_j^2 \rightarrow 1$ and $VIF_j >> 1$. if orthogonal, then  $R_j^2 \rightarrow 0$ and $VIF_j \rightarrow 1$
+
+Essentially, VIFs measure how much variance of regression coefficient $B_j$ is affected by its relationship of $X_J$ and other regressors.
+
+Threshold:
+- VIF > 2.5 (implies some evidence of multicollinearity)
+
+in R:
+
+```r
+Vif(fitted.model)
+```
+
+---
+
+mutlicollinearity inflates the variances of coefficients and increase probability that the coefficients will have the wrong sign.
+
+Other reasons why a wrong sign may appear include:
+- small range of regressor. if X to close together, variance of $\beta$ will be large. $Var(\beta_1) = \sigma^2 / \sum (x_i1 - \bar{x1})^2$. Small spread in x, lead to larger variance. 
+- Not including other important regressors
+- Wrong data used

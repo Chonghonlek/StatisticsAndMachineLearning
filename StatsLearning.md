@@ -171,7 +171,7 @@ $$
 1 - E[max_j P(Y=j|X)] , \text{where the expectation averages the probability over all X}
 $$
 
-#### K-Nearest Neighbour - KNN
+#### K-Nearest Neighbour - KNN (non-parametric)
 
 For real data, we do not know the conditional distribution of Y given X and so computing the Bayes classififier is impossible, Therefore, the bayes classifier serves as an unattainable gold standard.
 

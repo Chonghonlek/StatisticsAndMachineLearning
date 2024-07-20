@@ -73,7 +73,7 @@ None of these methods uniformly dominates the others. In any setting, the choice
 
 - Comparing logistic regression to LDA, we expect LDA to outperform logistic regression when the normality assumption holds, vice versa. 
 
-### KNN or K-Nearest Neighbours
+### KNN or K-Nearest Neighbours (Discussed in StatsLearning.md)
 
 - Comparing to KNN, KNN is a non -parametric approach that makes a prediction for an observation by taking the training observations that are closest to x and assigning to the class to whcih the plurality of these observations belong. 
 
@@ -83,10 +83,24 @@ None of these methods uniformly dominates the others. In any setting, the choice
 
 | Syntax      | Description | Remarks|
 | ----------- | ----------- |---|
-| Small n /Small p      | LDA/Naive Bayes  | Naive Bayes reduce variance more
+| Small n / Small p  (higher variance)    | LDA/Naive Bayes  | Naive Bayes reduce variance more
 | Bigger n   | QDA/KNN        | QDA may work better than KNN at a slight lower sample size
 
+### Refer to textbook for emperical evidence - binary prediction example with 100 random training data sets for each scenario
 
+When the true decision boundaries are linear, then the LDA and logistic regression approaches will tend to perform well. When the boundaries are moderately non-linear, QDA or naive Bayes may give better results. Finally, for much more complicated decision boundaries, a non-parametric approach such as KNN can be superior. But the level of smoothness for a non-parametric approach must be chosen carefully.
 
+- Scenario 1 (linear) : 20 training observations in each of the 2 classes. Observations within each class were uncorellated random normal variables with a different mean in each class. LDA and logistic regression performed well as it assumes linear decision boundary. KNN -1 performed poor in terms of variances that is not offset by a reduction in bias. QDA performed worse than LDA as it fit a more flexible classifier than necessary. The performance of naive bayes was slightly better than QDA as naive bayes assumption of indepdent predictors is correct. 
 
+- Scenario 2 (linear) Now, the 2 predictors had correlation of -0.5. This caused naive bayes to perform poorly given that the assumption of independet predictors is violated.
+
+- Scenario 3 (linear). Now the negative correlation still remains. But this time we generate $X_1$ and $X_2$ from t-distribution - which generated more extreme points. This set up violayed the assumptions of LDA since the observations were not drawn from a normal distribution. Logistic regression performed better than LDA. QDA also detiorated given the non-normality and naive bayes also performed poorly given the independence assumption
+
+- Scenario 4 (non-linear) Data is now generated from normal distribution with correlation of 0.5 between predictors in first class and correlation of -0.5 between predictors in the 2nd class. This corresponds to QDA assumption and resulted in quadratic decision boundaries. QDA outperformed all other approaches. Naive bayes assumption violated. 
+
+- Scenario 5 (non-linear) Data is generated from normal distribution with uncorrelated predictors. KNN-cross validation method gave best result. But KNN-1 was worst. this implies that even when data exhibits a complex non-linear relationship, a non parametric method such as KNN can still give poor results if level of smoothness is not chosen correctly. 
+
+- Scenario 6 (non-linear) now, observations come from normal distribution with a different diagonal covarinace matrix for each class. but now sample size is very small. Naive bayes performed well as assumptions were met. LDA and logistic regression performed poorly because of the nonlinear decision boundary. QDA performed poorly to naive bayes given the very small size. KNN also suffered due to very small sample size. 
+
+--- 
 
