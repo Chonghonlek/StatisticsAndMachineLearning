@@ -666,6 +666,7 @@ Threshold:
 in R:
 
 ```r
+library(car)
 Vif(fitted.model)
 ```
 
